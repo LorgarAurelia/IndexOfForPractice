@@ -19,6 +19,7 @@ namespace IndexOfForPractice
             }
             catch (Exception)
             {
+                Console.WriteLine("Введены некорректные для данные для поиска значения.");
                 return -1;
             }
 
@@ -73,7 +74,33 @@ namespace IndexOfForPractice
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string length, minTestValue, maxTestValue, valueForSearching;
+            int result;
+
+            Console.Write("Введите значение длины массива: \t");
+            length = Console.ReadLine();
+
+            Console.Write("Введите минимальное значение элемента массива: \t");
+            minTestValue = Console.ReadLine();
+
+            Console.Write("Введите максимальное значение элемента массива: \t");
+            maxTestValue = Console.ReadLine();
+
+            Console.Write("Введите число которое вы хотели бы найти в массиве: \t");
+            valueForSearching = Console.ReadLine();
+
+            result = IndexOf(GetRandomArray(length,minTestValue,maxTestValue),valueForSearching);
+
+            if (result == -1)
+            {
+                Console.WriteLine("Искомое значение в массиве не найдено!");
+            }
+            else 
+            {
+                Console.WriteLine("Искомое значение храниться в массиве под индексом: " + result);
+            }
+
+            Console.ReadLine();
         }
     }
 }
