@@ -32,6 +32,45 @@ namespace IndexOfForPractice
 
             return -1;
         }
+
+        static int[] GetRandomArray(string length, string minValue, string maxValue)
+        {
+            int[] randomArray;
+            uint parsedLength;
+            int parsedMinValue = 0, parsedMaxValue = 0;
+
+            Random random = new Random();
+
+            try
+            {
+                parsedLength = uint.Parse(length);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Введены некорректные данные для параметры длины массива");
+                parsedLength = 0;
+            }
+
+            try
+            {
+                parsedMinValue = int.Parse(minValue);
+                parsedMaxValue = int.Parse(maxValue);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Введены некорректные данные для верхнего или нижнего предела значений в элементах массива");
+                parsedLength = 0; 
+            }
+
+            randomArray = new int[parsedLength];
+
+            for (int i = 0; i < randomArray.Length; i++)
+            {
+                randomArray[i] = random.Next(parsedMinValue, parsedMaxValue);
+            }
+
+            return randomArray;
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
