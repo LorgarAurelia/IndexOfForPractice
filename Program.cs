@@ -9,65 +9,74 @@ namespace IndexOfForPractice
 {
     class Program
     {
+        /// <summary>
+        /// Метод для поиска индекса элемента масиива, метод возвращает индекс первого найденного жэлемента.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="valueForSearch"></param>
+        /// <returns></returns>
         static int IndexOf(int[] array, string valueForSearch) 
         {
             int parsedValue;
+            bool succesParse = true;
 
-            try
-            {
-                parsedValue = int.Parse(valueForSearch);
-            }
-            catch (Exception)
+            if (succesParse != int.TryParse(valueForSearch,out parsedValue))
             {
                 Console.WriteLine("Введены некорректные для данные для поиска значения.");
                 return -1;
             }
 
-            for (int i = 0; i < array.Length; i++) 
+
+            for (int currentValue = 0; currentValue < array.Length; currentValue++) 
             {
-                if (array[i] == parsedValue)
+                if (array[currentValue] == parsedValue)
                 {
-                    return i;
+                    return currentValue;
                 }
             }
 
             return -1;
         }
 
+        /// <summary>
+        /// Метод создаёт случайный массив int с заданными параметрами.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <returns></returns>
         static int[] GetRandomArray(string length, string minValue, string maxValue)
         {
             int[] randomArray;
             uint parsedLength;
-            int parsedMinValue = 0, parsedMaxValue = 0;
+            int parsedMinValue, parsedMaxValue;
+            bool succesInParse = true;
 
             Random random = new Random();
 
-            try
-            {
-                parsedLength = uint.Parse(length);
-            }
-            catch (Exception)
+            if (succesInParse != uint.TryParse(length,out parsedLength))
             {
                 Console.WriteLine("Введены некорректные данные для параметры длины массива");
                 parsedLength = 0;
             }
 
-            try
+            if (succesInParse != int.TryParse(minValue,out parsedMinValue))
             {
-                parsedMinValue = int.Parse(minValue);
-                parsedMaxValue = int.Parse(maxValue);
+                Console.WriteLine("Введены некорректные данные для верхнего предела значений в элементах массива");
+                parsedLength = 0;
             }
-            catch (Exception)
+
+            if (succesInParse != int.TryParse(maxValue,out parsedMaxValue))
             {
-                Console.WriteLine("Введены некорректные данные для верхнего или нижнего предела значений в элементах массива");
-                parsedLength = 0; 
+                Console.WriteLine("Введены некорректные данные для нижнего предела значений в элементах массива");
+                parsedLength = 0;
             }
 
             randomArray = new int[parsedLength];
 
-            for (int i = 0; i < randomArray.Length; i++)
+            for (int currentValue = 0; currentValue < randomArray.Length; currentValue++)
             {
-                randomArray[i] = random.Next(parsedMinValue, parsedMaxValue);
+                randomArray[currentValue] = random.Next(parsedMinValue, parsedMaxValue);
             }
 
             return randomArray;
@@ -97,7 +106,7 @@ namespace IndexOfForPractice
             }
             else 
             {
-                Console.WriteLine("Искомое значение храниться в массиве под индексом: " + result);
+                Console.WriteLine("Искомое значение храниться в массиве под индексом: \t" + result);
             }
 
             Console.ReadLine();
